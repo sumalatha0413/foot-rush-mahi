@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foot Rush - Codeathon 2K26</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #022c22, #1db954);
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Container */
+.container {
+    padding-top: 60px;
+}
+
+/* Logo */
+.logo {
+    width: 180px;
+    background: transparent;
+}
+
+/* Title Glow */
+h1 {
+    font-size: 50px;
+    margin: 10px 0;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #00ff88; }
+    to { text-shadow: 0 0 30px #00ff88; }
+}
+
+/* Subtitle */
+p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* Button */
+.btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #00ff88;
+    color: black;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #00cc66;
+}
+
+/* Lock Box */
+.lock-box {
+    margin: 30px auto;
+    padding: 30px;
+    width: 260px;
+    background: #011a14;
+    border: 2px solid #00ff88;
+    border-radius: 12px;
+    font-size: 22px;
+    transition: 0.5s;
+}
+
+/* Puzzle floating blocks */
+.puzzle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #00ff88;
+    opacity: 0.7;
+    border-radius: 6px;
+    animation: float 8s infinite linear;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh) rotate(0deg);
+    }
+    to {
+        transform: translateY(-10vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Puzzle Elements -->
+<div class="puzzle" style="left:10%; animation-delay:0s;"></div>
+<div class="puzzle" style="left:30%; animation-delay:2s;"></div>
+<div class="puzzle" style="left:50%; animation-delay:4s;"></div>
+<div class="puzzle" style="left:70%; animation-delay:1s;"></div>
+<div class="puzzle" style="left:90%; animation-delay:3s;"></div>
+
+<div class="container">
+
+    <!-- 🔁 Replace logo.png with your background-removed logo -->
+    <img src="logo.png" class="logo" alt="Foot Rush Logo">
+
+    <h1>FOOT RUSH</h1>
+    <p>Codeathon 2K26 | Puzzle • Lock • Key Challenge</p>
+
+    <div class="lock-box" id="lockBox">
+        🔒 Locked Challenge
+    </div>
+
+    <button class="btn" onclick="unlock()">Find the Key 🔑</button>
+
+</div>
+
+<script>
+function unlock() {
+    const box = document.getElementById("lockBox");
+
+    box.innerHTML = "🔓 Access Granted!";
+    box.style.background = "#00ff88";
+    box.style.color = "black";
+
+    // Confetti effect
+    for (let i = 0; i < 30; i++) {
+        let confetti = document.createElement("div");
+        confetti.style.position = "absolute";
+        confetti.style.width = "8px";
+        confetti.style.height = "8px";
+        confetti.style.background = "#00ff88";
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.top = "0px";
+        confetti.style.opacity = "0.8";
+        confetti.style.borderRadius = "50%";
+        confetti.style.animation = "fall 2s linear forwards";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 2000);
+    }
+}
+
+// Confetti falling animation
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
